@@ -1,0 +1,11 @@
+DEFINE TRANSACTION(BAO1)                     -
+       PROGRAM(BAO1)                         -
+       DESCRIPTION('Transaction for BAO1')   -
+       GROUP(BASE)                           -
+       TASKDATALOC(ANY)                      -
+       TASKDATAKEY(USER)                     -
+       TWASIZE(0)                            -
+       PROFILE(DFHCICST)                     -
+       PRIORITY(1)                           -
+       DYNAMIC(NO)                           -
+       REMOTE(NO)

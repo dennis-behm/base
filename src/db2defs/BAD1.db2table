@@ -1,0 +1,15 @@
+-- Create table BAD1
+CREATE TABLE BAD1 (
+    TRANSACTION_ID CHAR(10) NOT NULL, -- Transaction ID field
+    TRANSACTION_DATE DATE NOT NULL,  -- Transaction date field
+    TRANSACTION_USER CHAR(8) NOT NULL, -- Transaction user
+    PRIMARY KEY (TRANSACTION_ID) -- Define TRANSACTION_ID as the primary key
+);
+
+-- Add a comment to describe the table
+COMMENT ON TABLE BAD1 IS 'Table to store transaction-like fields for BAD1';
+
+-- Add comments to describe each column
+COMMENT ON COLUMN BAD1.TRANSACTION_ID IS 'Unique identifier for the transaction';
+COMMENT ON COLUMN BAD1.TRANSACTION_DATE IS 'Date of the transaction';
+COMMENT ON COLUMN BAD1.TRANSACTION_USER IS 'User of the transaction';
