@@ -1,0 +1,441 @@
+apiVersion: deploy.ibm.com/v1
+kind: DeploymentPlan
+metadata:
+  name: base
+  description: base
+  version: 20250521.113341.327
+  annotations:
+    creation_timestamp: 20250521.093349.040
+    engine:
+      version: 3.0.4
+      build: manual
+      date: Thu Apr 24 00:41:15 CEST 2025
+    package:
+      path: /u/dbehm/wazi-deploy/workspace/ts1_change_base/base/main/dbb-zappbuild.build_2025-05-21_11-33-08/deployPkgDir/applicationArchive.tar
+      sha256: e9696ed016f889d416bc59abbb4a47d90950e7d9d0f0487b3e20cd62ff26fbac
+activities:
+- name: CONFIG
+  description: |-
+    Load the generic Wazi Deploy Configuration variables
+    Specific for the Python implementation
+  properties: []
+  actions:
+  - name: READ CONFIGURATION
+    properties: []
+    steps:
+    - name: INCLUDE ENVIRONMENT VARIABLES
+      properties:
+      - key: template
+        value: include_vars
+      - key: var_include_vars
+        value: include_environment_vars
+      artifacts: []
+      types: []
+      short_name: INCLUDE_ENV_VARS
+    - name: INCLUDE MIDDLEWARE VARIABLES
+      properties:
+      - key: template
+        value: include_vars
+      - key: var_include_vars
+        value: include_middleware_vars
+      artifacts: []
+      types: []
+      short_name: INCLUDE_MIDDLEWARE_VARS
+    - name: INCLUDE GLOBAL VARIABLES
+      properties:
+      - key: template
+        value: include_vars
+      - key: var_include_vars
+        value: include_common_vars
+      artifacts: []
+      types: []
+      short_name: INCLUDE_GLOBAL_VARS
+    types: []
+    short_name: CONFIG
+  types: []
+- name: PACKAGE
+  description: |-
+    This activity expands the package into the working directory
+  properties: []
+  actions:
+  - name: PACKAGE
+    properties: []
+    steps:
+    - name: PACKAGE
+      properties: []
+      artifacts: []
+      types: []
+    types: []
+  types: []
+  tags:
+  - package
+- name: DEPLOY_MODULES
+  description: |-
+    This activity is deploys artifacts into the target PDS libraries
+  properties: []
+  actions:
+  - name: ADD
+    description: |-
+      This action is applicable when we add new artifacts.
+    properties:
+    - key: my_action_prop
+      value: my_value
+    steps:
+    - name: MEMBER_COPY
+      description: |-
+        This step do the copy of artifacts into PDSs
+      properties: []
+      artifacts:
+      - name: BAM1
+        properties:
+        - key: path
+          value: bin/load/BAM1.LOAD
+        - key: githash
+          value: f3c1785ad1cd103a16e6e24caae706428521718c
+        - key: giturl
+          value: https://github.com/dennis-behm/base.git
+        - key: dependency_set
+          value:
+          - lname: BAD1SQL
+            library: SYSLIB
+            category: COPY
+            sourceDir: /u/dbehm/wazi-deploy/workspace/ts1_change_base/base/main/dbb-zappbuild.build_2025-05-21_11-33-08/
+            file: base/src/copy/BAD1SQL.cpy
+            resolved: true
+            excluded: false
+          - lname: BAM1
+            library: SYSLIB
+            category: COPY
+            sourceDir: /u/dbehm/wazi-deploy/workspace/ts1_change_base/base/main/dbb-zappbuild.build_2025-05-21_11-33-08/
+            file: base/src/copy/BAM1.cpy
+            resolved: true
+            excluded: false
+          - lname: BAD1REC
+            library: SYSLIB
+            category: SQL INCLUDE
+            sourceDir: /u/dbehm/wazi-deploy/workspace/ts1_change_base/base/main/dbb-zappbuild.build_2025-05-21_11-33-08/
+            file: base/src/copy/BAD1REC.cpy
+            resolved: true
+            excluded: false
+          - lname: SQLCA
+            library: SYSLIB
+            category: SQL INCLUDE
+            resolved: false
+            excluded: false
+          - lname: BAM1
+            library: DBEHM.BASE.MAIN.BLD.OBJ
+            category: LINK
+            file: DBEHM.BASE.MAIN.BLD.OBJ(BAM1)
+            resolved: true
+            excluded: false
+          - lname: DSNHLI
+            library: DBC0CFG.DB2.V12.SDSNLOAD
+            category: LINK
+            file: DBC0CFG.DB2.V12.SDSNLOAD(DSNHLI)
+            resolved: true
+            excluded: false
+        - key: wd_manifest_index
+          value: 0
+        - key: type
+          value: LOAD
+        hash: f3c1785ad1cd103a16e6e24caae706428521718c
+      - name: BAB1
+        properties:
+        - key: path
+          value: bin/load/BAB1.LOAD
+        - key: githash
+          value: f3c1785ad1cd103a16e6e24caae706428521718c
+        - key: giturl
+          value: https://github.com/dennis-behm/base.git
+        - key: dependency_set
+          value:
+          - lname: BAM1
+            library: SYSLIB
+            category: COPY
+            sourceDir: /u/dbehm/wazi-deploy/workspace/ts1_change_base/base/main/dbb-zappbuild.build_2025-05-21_11-33-08/
+            file: base/src/copy/BAM1.cpy
+            resolved: true
+            excluded: false
+          - lname: BAB1
+            library: DBEHM.BASE.MAIN.BLD.OBJ
+            category: LINK
+            file: DBEHM.BASE.MAIN.BLD.OBJ(BAB1)
+            resolved: true
+            excluded: false
+        - key: wd_manifest_index
+          value: 0
+        - key: type
+          value: LOAD
+        hash: f3c1785ad1cd103a16e6e24caae706428521718c
+      - name: BAM1
+        properties:
+        - key: path
+          value: bin/dbrm/BAM1.DBRM
+        - key: githash
+          value: f3c1785ad1cd103a16e6e24caae706428521718c
+        - key: giturl
+          value: https://github.com/dennis-behm/base.git
+        - key: dependency_set
+          value:
+          - lname: BAD1SQL
+            library: SYSLIB
+            category: COPY
+            sourceDir: /u/dbehm/wazi-deploy/workspace/ts1_change_base/base/main/dbb-zappbuild.build_2025-05-21_11-33-08/
+            file: base/src/copy/BAD1SQL.cpy
+            resolved: true
+            excluded: false
+          - lname: BAM1
+            library: SYSLIB
+            category: COPY
+            sourceDir: /u/dbehm/wazi-deploy/workspace/ts1_change_base/base/main/dbb-zappbuild.build_2025-05-21_11-33-08/
+            file: base/src/copy/BAM1.cpy
+            resolved: true
+            excluded: false
+          - lname: BAD1REC
+            library: SYSLIB
+            category: SQL INCLUDE
+            sourceDir: /u/dbehm/wazi-deploy/workspace/ts1_change_base/base/main/dbb-zappbuild.build_2025-05-21_11-33-08/
+            file: base/src/copy/BAD1REC.cpy
+            resolved: true
+            excluded: false
+          - lname: SQLCA
+            library: SYSLIB
+            category: SQL INCLUDE
+            resolved: false
+            excluded: false
+          - lname: BAM1
+            library: DBEHM.BASE.MAIN.BLD.OBJ
+            category: LINK
+            file: DBEHM.BASE.MAIN.BLD.OBJ(BAM1)
+            resolved: true
+            excluded: false
+          - lname: DSNHLI
+            library: DBC0CFG.DB2.V12.SDSNLOAD
+            category: LINK
+            file: DBC0CFG.DB2.V12.SDSNLOAD(DSNHLI)
+            resolved: true
+            excluded: false
+        - key: wd_manifest_index
+          value: 0
+        - key: type
+          value: DBRM
+        hash: f3c1785ad1cd103a16e6e24caae706428521718c
+      - name: BAO1
+        properties:
+        - key: path
+          value: bin/load/BAO1.LOAD
+        - key: githash
+          value: f3c1785ad1cd103a16e6e24caae706428521718c
+        - key: giturl
+          value: https://github.com/dennis-behm/base.git
+        - key: dependency_set
+          value:
+          - lname: BAM1
+            library: SYSLIB
+            category: COPY
+            sourceDir: /u/dbehm/wazi-deploy/workspace/ts1_change_base/base/main/dbb-zappbuild.build_2025-05-21_11-33-08/
+            file: base/src/copy/BAM1.cpy
+            resolved: true
+            excluded: false
+          - lname: BAO1
+            library: DBEHM.BASE.MAIN.BLD.OBJ
+            category: LINK
+            file: DBEHM.BASE.MAIN.BLD.OBJ(BAO1)
+            resolved: true
+            excluded: false
+        - key: wd_manifest_index
+          value: 0
+        - key: type
+          value: LOAD
+        hash: f3c1785ad1cd103a16e6e24caae706428521718c
+      - name: BAD1
+        properties:
+        - key: path
+          value: bin/jcl/BAD1.JCL
+        - key: githash
+          value: f3c1785ad1cd103a16e6e24caae706428521718c
+        - key: giturl
+          value: https://github.com/dennis-behm/base.git
+        - key: wd_manifest_index
+          value: 0
+        - key: type
+          value: JCL
+        hash: f3c1785ad1cd103a16e6e24caae706428521718c
+      - name: BAB1
+        properties:
+        - key: path
+          value: bin/jcl/BAB1.JCL
+        - key: githash
+          value: f3c1785ad1cd103a16e6e24caae706428521718c
+        - key: giturl
+          value: https://github.com/dennis-behm/base.git
+        - key: wd_manifest_index
+          value: 0
+        - key: type
+          value: JCL
+        hash: f3c1785ad1cd103a16e6e24caae706428521718c
+      types: []
+    types: []
+  is_artifact: true
+  types:
+  - name: DBRM
+  - name: LOAD
+  - name: CICSLOAD
+  - name: MAPLOAD
+  - name: JCL
+  tags:
+  - deploy_modules
+- name: DB2
+  description: |-
+    This activity is dedicated to DBRM bind modules
+  properties: []
+  actions:
+  - name: UPDATE
+    description: |-
+      This action is applicable when we update a DBRM modules
+    properties: []
+    steps:
+    - name: DB2_BIND_PACKAGE
+      properties: []
+      artifacts:
+      - name: BAM1
+        properties:
+        - key: path
+          value: bin/dbrm/BAM1.DBRM
+        - key: githash
+          value: f3c1785ad1cd103a16e6e24caae706428521718c
+        - key: giturl
+          value: https://github.com/dennis-behm/base.git
+        - key: dependency_set
+          value:
+          - lname: BAD1SQL
+            library: SYSLIB
+            category: COPY
+            sourceDir: /u/dbehm/wazi-deploy/workspace/ts1_change_base/base/main/dbb-zappbuild.build_2025-05-21_11-33-08/
+            file: base/src/copy/BAD1SQL.cpy
+            resolved: true
+            excluded: false
+          - lname: BAM1
+            library: SYSLIB
+            category: COPY
+            sourceDir: /u/dbehm/wazi-deploy/workspace/ts1_change_base/base/main/dbb-zappbuild.build_2025-05-21_11-33-08/
+            file: base/src/copy/BAM1.cpy
+            resolved: true
+            excluded: false
+          - lname: BAD1REC
+            library: SYSLIB
+            category: SQL INCLUDE
+            sourceDir: /u/dbehm/wazi-deploy/workspace/ts1_change_base/base/main/dbb-zappbuild.build_2025-05-21_11-33-08/
+            file: base/src/copy/BAD1REC.cpy
+            resolved: true
+            excluded: false
+          - lname: SQLCA
+            library: SYSLIB
+            category: SQL INCLUDE
+            resolved: false
+            excluded: false
+          - lname: BAM1
+            library: DBEHM.BASE.MAIN.BLD.OBJ
+            category: LINK
+            file: DBEHM.BASE.MAIN.BLD.OBJ(BAM1)
+            resolved: true
+            excluded: false
+          - lname: DSNHLI
+            library: DBC0CFG.DB2.V12.SDSNLOAD
+            category: LINK
+            file: DBC0CFG.DB2.V12.SDSNLOAD(DSNHLI)
+            resolved: true
+            excluded: false
+        - key: wd_manifest_index
+          value: 0
+        - key: type
+          value: DBRM
+        hash: f3c1785ad1cd103a16e6e24caae706428521718c
+      types: []
+    - name: DB2_BIND_PLAN
+      properties: []
+      artifacts:
+      - name: BAM1
+        properties:
+        - key: path
+          value: bin/dbrm/BAM1.DBRM
+        - key: githash
+          value: f3c1785ad1cd103a16e6e24caae706428521718c
+        - key: giturl
+          value: https://github.com/dennis-behm/base.git
+        - key: dependency_set
+          value:
+          - lname: BAD1SQL
+            library: SYSLIB
+            category: COPY
+            sourceDir: /u/dbehm/wazi-deploy/workspace/ts1_change_base/base/main/dbb-zappbuild.build_2025-05-21_11-33-08/
+            file: base/src/copy/BAD1SQL.cpy
+            resolved: true
+            excluded: false
+          - lname: BAM1
+            library: SYSLIB
+            category: COPY
+            sourceDir: /u/dbehm/wazi-deploy/workspace/ts1_change_base/base/main/dbb-zappbuild.build_2025-05-21_11-33-08/
+            file: base/src/copy/BAM1.cpy
+            resolved: true
+            excluded: false
+          - lname: BAD1REC
+            library: SYSLIB
+            category: SQL INCLUDE
+            sourceDir: /u/dbehm/wazi-deploy/workspace/ts1_change_base/base/main/dbb-zappbuild.build_2025-05-21_11-33-08/
+            file: base/src/copy/BAD1REC.cpy
+            resolved: true
+            excluded: false
+          - lname: SQLCA
+            library: SYSLIB
+            category: SQL INCLUDE
+            resolved: false
+            excluded: false
+          - lname: BAM1
+            library: DBEHM.BASE.MAIN.BLD.OBJ
+            category: LINK
+            file: DBEHM.BASE.MAIN.BLD.OBJ(BAM1)
+            resolved: true
+            excluded: false
+          - lname: DSNHLI
+            library: DBC0CFG.DB2.V12.SDSNLOAD
+            category: LINK
+            file: DBC0CFG.DB2.V12.SDSNLOAD(DSNHLI)
+            resolved: true
+            excluded: false
+        - key: wd_manifest_index
+          value: 0
+        - key: type
+          value: DBRM
+        hash: f3c1785ad1cd103a16e6e24caae706428521718c
+      types: []
+    types: []
+  is_artifact: true
+  types:
+  - name: DBRM
+  tags:
+  - db2
+manifests:
+- name: base
+  description: base
+  version: 20250521.113341.327
+  annotations:
+    creationTimestamp: 20250521.113341.327
+    scmInfo:
+      type: git
+      uri: https://github.com/dennis-behm/base.git
+      branch: main
+      shortCommit: f3c1785ad1cd103a16e6e24caae706428521718c
+    packageInfo:
+      uri: http://10.3.20.231:8081/artifactory/base-dbehm-repo-local/release/rel-1.0.0/base-rel-1.0.0-2025-05-21_11-33-08.tar
+      type: artifactRepository
+deployment_methods:
+- apiVersion: deploy.ibm.com/v1
+  kind: DeploymentMethod
+  metadata:
+    name: CICS
+    description: |-
+      This deployment method can be use for the deployment of an CICS application.
+    version: 1.0.0
+    annotations:
+      deployVersion: 1.0.0
