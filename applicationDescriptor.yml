@@ -36,15 +36,6 @@ sources:
   - name: "BAM1"
     type: "UNKNOWN"
     usage: "public"
-baselines:
-- branch: "main"
-  type: "release"
-  reference: "rel-1.0.0"
-  buildid: "baseline"
-- branch: "release/rel-1.0.0"
-  type: "release"
-  reference: "rel-1.0.0"
-  buildid: "baseline"
 consumers:
 - name: "customer"
 - name: "payment"
