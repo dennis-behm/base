@@ -1,0 +1,265 @@
+apiVersion: deploy.ibm.com/v1
+kind: Evidence
+metadata:
+  name: base
+  description: base
+  version: 20250617.094751.821
+  annotations:
+    creation_timestamp: 20250617.074754.979
+    engine:
+      version: 3.0.5
+      build: manual
+      date: Thu Apr 24 00:41:15 CEST 2025
+    package:
+      path: /u/dbehm/wazi-deploy/workspace/ts1_delete_base/base/main/dbbbuild_2025-06-17_09-46-25/logs/base-rel-1.0.0-2025-06-17_09-46-25_delete.tar
+      sha256: 263877c580dd68719e730a85811c58736ba0ad09b2047d900274c00375f93a0e
+    runtime_context:
+      zoau_version: 1.2.5.9
+    environment_name: EOLEB7-Integration
+    deploy_timestamp: 20250617.074755.692
+    smf_record:
+      status: Ok
+status: Ok
+activities:
+- name: CONFIG
+  properties: []
+  actions:
+  - name: READ CONFIGURATION
+    properties: []
+    steps:
+    - name: INCLUDE ENVIRONMENT VARIABLES
+      properties:
+      - key: template
+        value: include_vars
+      - key: var_include_vars
+        value: include_environment_vars
+      artifacts: []
+      step_result:
+        status: Ok
+        msg: Building block include_vars succeeded
+        results:
+        - status: Ok
+          msg: Succeeded to find and access files in 'files_list' or files must not
+            exist
+          args:
+            files_list:
+            - /u/dbehm/git/wazi-deploy-sample/plum-samples/external-repos/deployment-method/global/environment-configuration/EOLEB7-Integration.yml
+            files_must_exist: true
+          results: []
+        duration: 0.009888410568237305
+      short_name: INCLUDE_ENV_VARS
+      loop_index: 0
+    - name: INCLUDE MIDDLEWARE VARIABLES
+      properties:
+      - key: template
+        value: include_vars
+      - key: var_include_vars
+        value: include_middleware_vars
+      artifacts: []
+      step_result:
+        status: Ok
+        msg: Building block include_vars succeeded
+        results:
+        - status: Ok
+          msg: Succeeded to find and access files in 'files_list' or files must not
+            exist
+          args:
+            files_list:
+            - /u/dbehm/git/wazi-deploy-sample/plum-samples/external-repos/deployment-method/global/cics_config.yml
+            - /u/dbehm/git/wazi-deploy-sample/plum-samples/external-repos/deployment-method/global/db2_config.yml
+            files_must_exist: true
+          results: []
+        duration: 0.015325307846069336
+      short_name: INCLUDE_MIDDLEWARE_VARS
+      loop_index: 0
+    - name: INCLUDE GLOBAL VARIABLES
+      properties:
+      - key: template
+        value: include_vars
+      - key: var_include_vars
+        value: include_common_vars
+      artifacts: []
+      step_result:
+        status: Ok
+        msg: Building block include_vars succeeded
+        results:
+        - status: Ok
+          msg: Succeeded to find and access files in 'files_list' or files must not
+            exist
+          args:
+            files_list:
+            - /u/dbehm/git/wazi-deploy-sample/plum-samples/external-repos/deployment-method/global/jcl_verification.yml
+            - /u/dbehm/git/wazi-deploy-sample/plum-samples/external-repos/deployment-method/global/pds_specification.yml
+            - /u/dbehm/git/wazi-deploy-sample/plum-samples/external-repos/deployment-method/global/types_pattern_mapping.yml
+            files_must_exist: true
+          results: []
+        duration: 0.043637752532958984
+      short_name: INCLUDE_GLOBAL_VARS
+      loop_index: 0
+    action_result:
+      status: Ok
+      msg: Ok
+      results: []
+    short_name: CONFIG
+    loop_index: 0
+  activity_result:
+    status: Ok
+    msg: Ok
+    results: []
+  description: |-
+    Load the generic Wazi Deploy Configuration variables
+    Specific for the Python implementation
+  loop_index: 0
+- name: PACKAGE
+  properties: []
+  actions:
+  - name: PACKAGE
+    properties: []
+    steps:
+    - name: PACKAGE
+      properties: []
+      artifacts: []
+      step_result:
+        status: Ok
+        msg: Expand package completed
+        results:
+        - status: Ok
+          msg: Succeeded to expand the package /u/dbehm/wazi-deploy/workspace/ts1_delete_base/base/main/dbbbuild_2025-06-17_09-46-25/logs/base-rel-1.0.0-2025-06-17_09-46-25_delete.tar
+            to /u/dbehm/wazi-deploy/workspace/ts1_delete_base/base/main/dbbbuild_2025-06-17_09-46-25
+            on system os OS/390
+          results:
+            command: subprocess.run(['tar', '-xvf', '/u/dbehm/wazi-deploy/workspace/ts1_delete_base/base/main/dbbbuild_2025-06-17_09-46-25/logs/base-rel-1.0.0-2025-06-17_09-46-25_delete.tar',
+              '-L', 'T', '-C', '/u/dbehm/wazi-deploy/workspace/ts1_delete_base/base/main/dbbbuild_2025-06-17_09-46-25'],
+              capture_output=True, text=True)
+            rc: 0
+        duration: 0.21049141883850098
+      loop_index: 0
+    action_result:
+      status: Ok
+      msg: Ok
+      results: []
+    loop_index: 0
+  activity_result:
+    status: Ok
+    msg: Ok
+    results: []
+  description: This activity expands the package into the working directory
+  loop_index: 0
+  tags:
+  - package
+- name: DELETE_MODULES
+  properties: []
+  actions:
+  - name: DELETE
+    properties: []
+    steps:
+    - name: MEMBER_ARCHIVE
+      properties: []
+      artifacts:
+      - name: BAB1
+        hash: a1626e9622567a27932e3b36ad933e6bfb5302cf
+        properties:
+        - key: path
+          value: bin/jcl/BAB1.JCL
+        - key: githash
+          value: a1626e9622567a27932e3b36ad933e6bfb5302cf
+        - key: giturl
+          value: https://github.com/dennis-behm/base.git
+        - key: wd_manifest_index
+          value: 0
+        - key: type
+          value: JCL
+      step_result:
+        status: Ok
+        msg: All items completed
+        results:
+        - status: Ok
+          msg: Succeeded to copy 'WDEPLOY.BASE.INT.JCL(BAB1)' to 'WDEPLOY.BASE.INT.BACK.JCL(BAB1)'
+          args:
+            pattern: .*.JCL$
+            dataset: WDEPLOY.BASE.INT.JCL
+            dataset_backup: WDEPLOY.BASE.INT.BACK.JCL
+            force_lock: true
+            aliases: true
+            is_load: false
+            is_binary: false
+            is_psb: false
+            is_dbd: false
+            is_asa_text: false
+            rename_subs: []
+            use_native_copy: false
+          results:
+            command: 'datasets._copy(WDEPLOY.BASE.INT.JCL(BAB1), WDEPLOY.BASE.INT.BACK.JCL(BAB1),
+              None, **{''options'': ''''})'
+            result_command:
+              rc: 0
+              response_format: UTF-8
+              stdout_response: ''
+              stderr_response: ''
+              command: dcp  -- "WDEPLOY.BASE.INT.JCL(BAB1)" "WDEPLOY.BASE.INT.BACK.JCL(BAB1)"
+        duration: 4.526077032089233
+      description: This step backs up already installed artifacts into the backup
+        PDS
+      loop_index: 0
+    - name: MEMBER_DELETE
+      properties: []
+      artifacts:
+      - name: BAB1
+        hash: a1626e9622567a27932e3b36ad933e6bfb5302cf
+        properties:
+        - key: path
+          value: bin/jcl/BAB1.JCL
+        - key: githash
+          value: a1626e9622567a27932e3b36ad933e6bfb5302cf
+        - key: giturl
+          value: https://github.com/dennis-behm/base.git
+        - key: wd_manifest_index
+          value: 0
+        - key: type
+          value: JCL
+      step_result:
+        status: Ok
+        msg: All items completed
+        results:
+        - status: Ok
+          msg: Succeeded to delete member WDEPLOY.BASE.INT.JCL(BAB1)
+          arg:
+            pattern: .*.JCL$
+            dataset: WDEPLOY.BASE.INT.JCL
+            force: false
+          results:
+            command: datasets._delete_members(WDEPLOY.BASE.INT.JCL(BAB1),force=False)
+            rc: 0
+            msg:
+              rc: 0
+              response_format: UTF-8
+              stdout_response: ''
+              stderr_response: ''
+              command: mrm  "WDEPLOY.BASE.INT.JCL(BAB1)"
+        duration: 2.978999376296997
+      description: This step deletes the artifacts
+      loop_index: 0
+    action_result:
+      status: Ok
+      msg: Ok
+      results: []
+    description: This action is applicable when the artifacts are deleted
+    loop_index: 0
+  activity_result:
+    status: Ok
+    msg: Ok
+    results: []
+  description: This activity is dedicated to the deletion of the artifacts from the
+    PDS(E)s
+  loop_index: 0
+manifests:
+- name: base
+  description: base
+  version: 20250617.094751.821
+  annotations:
+    creationTimestamp: 20250617.094751.821
+    scmInfo:
+      type: git
+      uri: https://github.com/dennis-behm/base.git
+      branch: main
+      shortCommit: a1626e9622567a27932e3b36ad933e6bfb5302cf
