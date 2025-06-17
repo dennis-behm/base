@@ -34,16 +34,16 @@ if [ $rc -eq 0 ]; then
 fi
 
 if [ $rc -eq 0 ]; then
-    packageBuildOutputs.sh -w $application/$branchName/${buildImplementation}build_$timestamp -a $application -b main -p release -i $timestamp -r rel-1.0.0 -t ${application}-rel-1.0.0-${timestamp}.tar
+    packageBuildOutputs.sh -w $application/$branchName/${buildImplementation}build_$timestamp -a $application -b main -p release -i $timestamp -r rel-1.0.0 -u
     rc=$?
 fi
 
 if [ $rc -eq 0 ]; then
-    wazideploy-generate.sh -w  $application/$branchName/${buildImplementation}build_$timestamp -a $application -b $branchName -i ${application}-rel-1.0.0-${timestamp}.tar
+    wazideploy-generate.sh -w  $application/$branchName/${buildImplementation}build_$timestamp -a $application -b $branchName -P release -R rel-1.0.0 -I $timestamp
     rc=$?
 fi
 if [ $rc -eq 0 ]; then
-    wazideploy-deploy.sh -w $application/$branchName/${buildImplementation}build_$timestamp -e EOLEB7-$application-Integration.yaml -l deploy-logs/evidences/evidence.yaml -i ${application}-rel-1.0.0-${timestamp}.tar
+    wazideploy-deploy.sh -w $application/$branchName/${buildImplementation}build_$timestamp -e EOLEB7-$application-Integration.yaml -l deploy-logs/evidences/evidence.yaml
     rc=$?
 fi
 
