@@ -1,0 +1,49 @@
+---
+#
+# Licensed materials - Property of IBM
+# 5655-AC5 Copyright IBM Corp. 2024, 2025
+# All rights reserved
+# US Government users restricted rights  -  Use, duplication or
+# disclosure restricted by GSA ADP schedule contract with IBM Corp.
+#
+version: 1.0.0
+application:
+  name: base
+  tasks:
+
+    # Variable overrides for the ImpactAnalysis task
+    - task: ImpactAnalysis
+      variables:
+        # Associate dependency files to program types. For more information see 
+        # https://www.ibm.com/docs/en/dbb/3.0?topic=index-task-impactanalysis#defining-impact-query-patterns
+        - name: impactQueryPatterns
+          value:
+            # Cobol program dependency patterns
+            - languageExt: cbl      
+              dependencyPatterns: 
+                - ${APP_DIR_NAME}/src/copy/*.cpy   # Copybook source dependency
+            # Link card dependency patterns
+            - languageExt: lnk                    
+              dependencyPatterns: 
+                - ${APP_DIR_NAME}/src/cobol/*.cbl      # Static link dependency 
+
+    # Variable overrides for the Cobol language task
+    - task: Cobol
+      variables:  
+        - name: dependencySearchPath
+          value: search:${WORKSPACE}/?path=${APP_DIR_NAME}/src/copy/*.cpy
+
+     
+    # Variable overrides for the ScannerInit task
+    - task: ScannerInit
+      variables:
+        - name: loadModuleExcludeList
+          value: "${SCEELKED}.*,${SDFHLOAD}.*"
+
+    # Variable overrides for the Package task
+    - task: Package
+      variables:
+        - name: excludedDeployTypes
+          value: 
+            - UNIT-TESTCASE # Exclude unit test cases from packaging
+            
